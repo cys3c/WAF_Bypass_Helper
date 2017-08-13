@@ -23,6 +23,7 @@ class PRIORITY:
 class TYPE:
     SPECIFIED = -100
     UNIVERSAL = 100
+    UNIVERSAL_NETWORK = 101
     BackEND_SPECIFIED = 0
 
 class NETWORK:

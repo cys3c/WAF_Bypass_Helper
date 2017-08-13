@@ -9,7 +9,7 @@ def tamper(payload, **kwargs):
     
 
     >>> /etc/passwd 
-    //etc//passwd 
+    /./etc/./passwd 
     
     """
     repeat_el='./'
