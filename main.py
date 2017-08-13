@@ -143,11 +143,12 @@ def myprint(string,log_level):
 
 
 def main():
-    global directory, outputfile, specifiedattacktechnik, dbname, type_atack, injection_element, specifiedbackend, url_for_atack, request_param_for_atack, cookie,proxy, post,verbose
+    global directory, outputfile,injection_file, specifiedattacktechnik, dbname, type_atack, injection_element, specifiedbackend, url_for_atack, request_param_for_atack, cookie,proxy, post,verbose
     directory='Tampers'
     parser=createParser()
     atack_params=parser.parse_args()
     injection_element  = atack_params.injstring
+    injection_file  = atack_params.injfile
     type_atack = atack_params.typeofatack
     outputfile = atack_params.outputfile
     dbname = atack_params.dbname
@@ -160,15 +161,16 @@ def main():
     proxy=atack_params.proxy
     post=atack_params.post
     verbose=atack_params.V
-    if injection_element and type_atack:
+    if (injection_element or injection_file) and type_atack:
         use_bypass(type_atack,injection_element)       
     else:
-        print ('No required parameters: -s and -t. Please read help')
+        print ('No required parameters: -s or --injfile and -t. Please read help(-h)')
         sys.exit()
 
 def createParser ():
     parser = argparse.ArgumentParser()
     parser.add_argument ('-s','--injstring', default='-1', help='string')
+    parser.add_argument ('--injfile', default=None, help='File this injection or request')
     parser.add_argument ('-t','--typeofatack',help='[sqli,xss,ldapi,pathtr,xxe]')
     parser.add_argument ('-o','--outputfile', help='only bypass strings')
     parser.add_argument ('-db','--dbname',help='[sql,mysql,orale]')

@@ -1,7 +1,8 @@
-
+# -*- coding: utf-8 -*
 import sys
 from main_modules.settings import PRIORITY, TYPE
-__classificationtype__=TYPE.UNIVERSALE
+
+__classificationtype__=TYPE.UNIVERSAL
 __priority__ = PRIORITY.LOWEST
 
 

@@ -36,7 +36,10 @@ def get_sender(url,bypass=None,cookie=None,useproxy=None,get_full_request=False,
     if bypass:       
         # как красиво обрабатывать наличие порта?
         bypass=urllib.quote(bypass, safe='')
-        my_url=SplitResult.scheme+'://'+SplitResult.hostname+'/'+SplitResult.path+'?'
+        if post:
+            my_url=''
+        else:
+            my_url=SplitResult.scheme+'://'+SplitResult.hostname+'/'+SplitResult.path+'?'
         postdata=''
         for param in param_array:
             i=0
@@ -44,15 +47,15 @@ def get_sender(url,bypass=None,cookie=None,useproxy=None,get_full_request=False,
                 if param==prm_to_atack:
                     meanings_array[i]=bypass
                 i+=1
-        for param in param_array:
-            i=0
-            my_url=url+'&'+str(param)+'='+str(meanings_array[i])
+        i=0
+        for param in param_array:   
+            my_url=my_url+'&'+str(param)+'='+str(meanings_array[i])
             postdata=postdata+'&'+str(param)+'='+str(meanings_array[i])
             i+=1
         postdata=postdata[1:]
-        
+        my_url=my_url[1:]
+        my_url=url+my_url
 
-    #sys.exit()
     http_proxy  = NETWORK.http_proxy
     https_proxy = NETWORK.https_proxy
 
@@ -112,7 +115,6 @@ def response_dif(response1,response2):
     return i
 
 def bypass_tester(my_url,bypass,cookie,proxy,response,request_param_for_atack,post):
-    #get_sender(url,bypass=None,cookie=None,useproxy=None,get_full_request=False,request_param_for_atack=[],post):
     result=get_sender(my_url,bypass,cookie,proxy,response,request_param_for_atack,post)
     if response==False:
         if str(result)[0]=='4':
@@ -128,7 +130,7 @@ def bypass_tester(my_url,bypass,cookie,proxy,response,request_param_for_atack,po
  
             return 1
         else:
-            print 'Nothing ' +str(result)[0]
+            print ('Nothing '+str(result)[0])
             return 0
 
 
